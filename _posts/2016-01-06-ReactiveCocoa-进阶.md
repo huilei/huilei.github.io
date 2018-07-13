@@ -1,16 +1,14 @@
 ---
 layout:     post
-title:      ReactiveCocoa 进阶
-subtitle:   函数式编程框架 ReactiveCocoa 进阶
-date:       2017-01-06
+title:      Pact契约测试workshop-绕坑记（C#版本）
+subtitle:   C#版本
+date:       2018-07-13
 author:     BY
 header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
-    - iOS
-    - ReactiveCocoa
-    - 函数式编程
-    - 开源框架
+    - Pact
+    - 契约测试
 ---
 # 前言
 
