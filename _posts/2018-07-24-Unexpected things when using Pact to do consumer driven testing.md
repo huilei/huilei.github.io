@@ -12,9 +12,10 @@ tags:
 ---
 # 前言
 
->最近在用Pact做契约测试，这里有个Step by step的workshop很不错。[Example .NET Core Project for Pact Workshop](https://github.com/tdshipley/pact-workshop-dotnet-core-v1),但也碰到一些问题，记录下来，帮助别人快速搭建Pact环境。
+>最近在用Pact做契约测试，这里有个Step by step的workshop很不错:[Example .NET Core Project for Pact Workshop](https://github.com/tdshipley/pact-workshop-dotnet-core-v1),但也碰到一些问题，记录下来，帮助别人快速搭建Pact环境。
 
 1.运行consumer端的测试，有时候不会更新生成的json格式的契约文件。重新运行一遍就会做更新。
+
 2.在consumer端的xunit中定义了mockserver,如下代码：
 ```
     _mockProviderService.Given("some state")
@@ -46,6 +47,7 @@ tags:
 ```
 目前感觉这一步有些多此一举，为什么需要给mockserver发送一次请求，而且请求中的path需要和给_mockProviderService定义的request中的path对应上，然后Pact才会成json文件？
 _mockProviderService不过是按照之前定义的request和response去做事情，不用真实的发送请求，它也完全有做够的信息去生成json文件的。
+
 3.我们在给api发送请求，request的body中常常需要设定信息。在C#的Pact版本中，不能把这些json信息直接copy到代码中使用，例如body中信息类似：
 
 ```
