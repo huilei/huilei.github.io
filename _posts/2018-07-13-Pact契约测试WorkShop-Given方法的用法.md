@@ -105,3 +105,22 @@ postgres_1    | 2018-07-23 09:29:31.996 UTC [1135] STATEMENT:  SELECT NULL AS "n
 ```
 契约文件上传到pact broker如下图：
 ![Pact Broker](/img/pact_broker_1.jpg)
+
+10.Docker中pact broker的默认账户密码是"username"和"password"，在consumer端用下面的代码push到broker中
+```
+private void pushToPactBroker()
+        {
+            var pactPublisher = new PactPublisher("http://xxxxxx", new PactUriOptions("username", "password"));
+            pactPublisher.PublishToBroker(
+                @"..\..\..\..\..\pacts\consumer-provider.json",
+                "2.1.3");
+        }
+```
+在provider端用下面的代码去读取json文件：
+```
+IPactVerifier pactVerifier = new PactVerifier(PactVerifierConfig);
+            pactVerifier.ServiceProvider("Provider", ProviderUri)
+                .HonoursPactWith("Consumer")
+                .PactUri(@"http://xxxxx/pacts/provider/Provider/consumer/Consumer/latest")
+                .Verify();
+```
