@@ -14,6 +14,18 @@ tags:
 
 >最近在用Pact做契约测试，这里有个Step by step的workshop很不错:[Example .NET Core Project for Pact Workshop](https://github.com/tdshipley/pact-workshop-dotnet-core-v1),但也碰到一些问题，记录下来，帮助别人快速搭建Pact环境。
 
+首先，契约测试和传统的API测试有相似点，那两者区别是什么？
+契约测试主要解决了几个API测试不好解决的问题。例如：
+设想两个场景
+1.后端没有开发好，前端想开始开发，怎么办？
+传统的API测试，碰到这种情况，直觉是想在前端用一个mock server来做，但接着又回碰到一系列问题，mock server中的request和response应该是consumer定义，还是provider定义？定义好的mock server,如果provider端没有按照这个定义去实现怎么快速发现等等。
+而Pact作为测试框架，比较优雅的解决了这一系列的问题。
+
+2.传统的API测试失败了，到底是后端修改代码造成的，还是使用者代码造成的？（特别是后端环境比较复杂时候，定位时间会比较长）
+在传统API测试中，需要调查原因分析，花费时间。现在用了契约测试，如果是后端代码造成的，那么消费者端的CI上是测试通过的，因为消费者端用的是mock server。而后端CI会挂，因为后端replay契约文件时候会报错。这样马上就定位出造成错误的地方了。
+
+
+
 1.运行consumer端的测试，有时候不会更新生成的json格式的契约文件。重新运行一遍就会做更新。
 
 2.在consumer端的xunit中定义了mockserver,如下代码：
